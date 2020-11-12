@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FiLogIn } from 'react-icons/fi';
+import { FiLogIn, FiArrowLeft } from 'react-icons/fi';
 
 import api from '../../services/api'
 
@@ -49,6 +49,10 @@ export default function Logon() {
                     <Link className="back-link" to="/register">
                         <FiLogIn size={16} color="#5e8dff" />
                         Não tenho cadastro
+                    </Link>
+                    <Link className="back-link" to="/">
+                        <FiArrowLeft size={16} color="#5e8dff" />
+                        Voltar
                     </Link>
                 </form>
 
