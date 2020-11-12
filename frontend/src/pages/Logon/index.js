@@ -18,7 +18,7 @@ export default function Logon() {
             const response = await api.post('/house/auth', { email, senha });
 
             localStorage.setItem('houseId', email);
-            localStorage.setItem('houseName', response.data.name);
+            localStorage.setItem('houseName', response.data.user[0].name);
             history.push('/');
         } catch (error) {
             alert('Falha no login, tente novamente')
