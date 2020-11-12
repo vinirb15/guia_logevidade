@@ -8,6 +8,11 @@
     margin: 3.2rem auto;
 }
 
+.top a{
+    margin: 0!important;
+    width: 5rem!important;
+}
+
 .logo {
     height: 5rem;
     width: 5rem;
