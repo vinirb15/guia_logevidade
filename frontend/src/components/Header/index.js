@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiPower, FiLogIn, FiEdit } from 'react-icons/fi';
 import Logo from '../../assets/user.png'
 
@@ -9,14 +9,15 @@ export default function Header() {
 
     const [loading, setLoading] = useState(true)
 
+    const houseEmail = localStorage.getItem('houseEmail');
     const houseId = localStorage.getItem('houseId');
     const houseName = localStorage.getItem('houseName');
 
     useEffect(() => {
-        if (!houseId) {
+        if (!houseEmail) {
             setLoading(false)
         }
-    }, [houseId]);
+    }, [houseEmail]);
 
     const history = useHistory();
 
@@ -38,9 +39,15 @@ export default function Header() {
         history.push('/register');
     }
 
+    function handleProfile() {
+        history.push('/register');
+    }
+
     const loged = (
         <header className="top">
+            <Link to={"/house/"+ houseId}>
             <img src={Logo} className="logo" alt="logo" />
+            </Link>
             <span>Bem vindo, {houseName}</span>
 
             <button onClick={handleLogout} type="button">
