@@ -39,10 +39,6 @@ export default function Header() {
         history.push('/register');
     }
 
-    function handleProfile() {
-        history.push('/register');
-    }
-
     const loged = (
         <header className="top">
             <Link to={"/house/"+ houseId}>

@@ -19,6 +19,7 @@ export default function Logon() {
             localStorage.setItem('houseEmail', email);
             localStorage.setItem('houseId', response.data.user[0].id);
             localStorage.setItem('houseName', response.data.user[0].name);
+            localStorage.setItem('auth', response.data.token);
             history.push('/');
         } catch (error) {
             alert('Falha no login, tente novamente')

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { FiMap, FiPhone, FiMail } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
 
 import api from '../../services/api';
 

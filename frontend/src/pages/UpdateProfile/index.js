@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FiArrowLeft, FiLogIn, FiKey } from 'react-icons/fi';
+import { FiArrowLeft, FiKey } from 'react-icons/fi';
 
 import api from '../../services/api';
 import './styles.css';
@@ -16,7 +16,28 @@ export default function Register() {
     const [city, setCity] = useState('');
     const [uf, setUf] = useState('');
 
+    const [house, setHouse] = useState([]);
+
     const history = useHistory();
+
+    const houseId = localStorage.getItem('houseId');
+    const auth = localStorage.getItem('auth');
+
+    useEffect(() => {
+        loadProfile()
+    }, []);
+
+    async function loadProfile() {
+        await api.get(`/house/${houseId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${auth}`,
+                }
+            }).then(response => {
+                setHouse(response.data[0]);
+                console.log(response.data[0])
+            })
+    }
 
     async function handleRegister(e) {
         e.preventDefault();
@@ -32,9 +53,13 @@ export default function Register() {
         }
 
         try {
-            const response = await api.post('/house', data);
+            const response = await api.put(`/house/${houseId}`, data, {
+                headers: {
+                    Authorization: `Bearer ${auth}`,
+                }
+            });
 
-            alert(`Bem vindo(a): ${response.data.name}`);
+            alert(`Dados Atualizados!`);
 
             history.push('/');
         } catch (error) {
@@ -47,26 +72,21 @@ export default function Register() {
     function mostrarOcultarSenha() {
         var senha = document.getElementById("password");
         if (senha.type === "password") {
-          senha.type = "text";
+            senha.type = "text";
         } else {
-          senha.type = "password";
+            senha.type = "password";
         }
-      }
+    }
 
     return (
         <div className="register-container">
             <div className="content">
                 <section>
 
-                    <h1>Cadastro</h1>
-                    <p>faça seu cadastro para ajudar nossos idosos!</p>
+                    <h1>Atualizar Dados</h1>
+                    <p>preencha todos os campos antes de atualizar!</p>
 
-                    <Link className="back-link" to="/logon">
-                        <FiLogIn size={16} color="#5e8dff" />
-                        Faça login
-                    </Link>
-
-                    <Link className="back-link" to="/">
+                    <Link className="back-link" to={"/house/" + houseId}>
                         <FiArrowLeft size={16} color="#5e8dff" />
                         Voltar
                     </Link>
@@ -74,7 +94,7 @@ export default function Register() {
                 </section>
                 <form onSubmit={handleRegister}>
                     <input
-                        placeholder="Nome da Organização"
+                        placeholder={house.name}
                         value={name}
                         onChange={e => setName(e.target.value)}
                     />
@@ -86,44 +106,44 @@ export default function Register() {
                         value={senha}
                         onChange={e => setSenha(e.target.value)}
                     />
-                        
-                    <FiKey onClick={() => mostrarOcultarSenha()}/>
+
+                    <FiKey onClick={() => mostrarOcultarSenha()} />
 
                     <input
                         type="email"
-                        placeholder="E-Mail"
+                        placeholder={house.email}
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
 
                     <input
-                        placeholder="Número de Contato  Ex:(xx)xxxx-xxxx"
+                        placeholder={house.cellNumber}
                         value={cellNumber}
                         onChange={e => setCellNumber(e.target.value)}
                     />
 
                     <textarea
-                        placeholder="Descrição"
+                        placeholder={house.description}
                         value={description}
                         onChange={e => setDescription(e.target.value)}
                     />
 
                     <div className="input-group">
                         <input
-                            placeholder="Cidade"
+                            placeholder={house.city}
                             value={city}
                             onChange={e => setCity(e.target.value)}
                         />
 
                         <input
-                            placeholder="UF"
+                            placeholder={house.uf}
                             style={{ width: 80 }}
                             value={uf}
                             onChange={e => setUf(e.target.value)}
                         />
                     </div>
 
-                    <button className="button" type="submit">Cadastrar</button>
+                    <button className="button" type="submit">Atualizar Dados</button>
                 </form>
             </div>
         </div>
