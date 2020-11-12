@@ -3,9 +3,17 @@
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    client: 'mysql',
     connection: {
-      filename: './dev.sqlite3'
+      host: 'localhost',
+      user: 'root',
+      password: '1010',
+      database: 'guia_longevidade',
+      insecureAuth: true
+    },
+    migrations: {
+      tableName: 'knex_migrations',
+      directory: './src/database/migrations'
     }
   },
 
