@@ -1,8 +1,12 @@
-import './App.css';
+import React from 'react';
+
+import './global.css'
+
+import Routes from './routes'
 
 function App() {
   return (
-    <h1>welcome to the jungle!</h1>
+    <Routes />
   );
 }
 
