@@ -12,9 +12,6 @@ export default function Profile() {
 
     const [houses, setHouses] = useState([]);
 
-    // const houseId = localStorage.getItem('houseId');
-    // const houseName = localStorage.getItem('houseName');
-
     useEffect(() => {
         loadIndex()
     }, []);
@@ -48,6 +45,7 @@ export default function Profile() {
 
             <h1>Casas cadastrados</h1>
             <input
+                placeholder="Digite Sua Cidade"
                 onChange={searchHouse}
             />
 
@@ -56,7 +54,7 @@ export default function Profile() {
                     <li key={house.id}>
                         <strong>Casa: </strong>
                         <p>{house.name}</p>
-                        
+
                         <strong>Endereço: </strong>
                         <p><FiMap /> {house.city} {house.uf}</p>
 

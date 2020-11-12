@@ -5,6 +5,15 @@
     margin: 32px auto;
 }
 
+.profile-container input{
+    width: 100%;
+    padding: 1rem;
+    background: #f0f0f5;
+    box-shadow: 0 0 100px #efefef;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
 .profile-container header {
     display: flex;
     align-items: center;
@@ -85,3 +94,4 @@
 .button {
     margin-top: 3rem;
 }
+
