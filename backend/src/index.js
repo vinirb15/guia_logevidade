@@ -20,7 +20,7 @@ app.use((error, req, res, next) => {
     res.json({ error: error.message })
 })
 
-app.listen(3333, () => {
+app.listen(process.env.PORT, () => {
     var dtNow = new Date;
     console.log('--------------------------------------');
     console.log('    Server running: ' + dtNow.getHours() + ":" + dtNow.getMinutes() + ":" + dtNow.getSeconds());
