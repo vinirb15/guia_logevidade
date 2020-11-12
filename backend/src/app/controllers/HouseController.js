@@ -11,7 +11,7 @@ module.exports = {
 
     async create(req, res, next) {
         try {
-            const { name, senha, email, cellNumber, city, uf } = req.body;
+            const { name, senha, email, description, cellNumber, city, uf } = req.body;
 
             const mail = await knex('house').select('email').where('email', email);
 
@@ -36,6 +36,7 @@ module.exports = {
                 name,
                 password,
                 email,
+                description,
                 cellNumber,
                 city,
                 uf,
@@ -62,7 +63,7 @@ module.exports = {
 
     async update(req, res, next) {
         try {
-            const { name, senha, email, cellNumber, city, uf } = req.body
+            const { name, senha, email, description, cellNumber, city, uf } = req.body
             const { id } = req.params
 
             const updated = new Date();
@@ -80,6 +81,7 @@ module.exports = {
                     name,
                     password,
                     email,
+                    description,
                     cellNumber,
                     city,
                     uf,
@@ -150,11 +152,23 @@ module.exports = {
         try {
             const { id } = req.params
             const results = await knex('house')
-                .select('name', 'email', 'cellNumber', 'city', 'uf')
+                .select('name', 'email', 'cellNumber', 'city', 'uf', 'description')
                 .where('id', id);
             return res.json(results);
         }
         catch (error) {
+            next(error);
+        }
+    },
+
+    async find(req, res, next) {
+        try {
+            const { city } = req.params
+            const results = await knex('house')
+                .select('*')
+                .where('city', 'like', '%'+city+'%')
+            return res.json(results)
+        } catch (error) {
             next(error);
         }
     }

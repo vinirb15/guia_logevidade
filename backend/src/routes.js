@@ -8,7 +8,7 @@ const authMiddleware = require('./app/middlewares/auth');
 routes.get('/house', HouseController.index);
 routes.post('/house', HouseController.create);
 routes.post('/house/auth', HouseController.auth);
-
+routes.get('/find/:city', HouseController.find);
 
 
 routes.use(authMiddleware);
