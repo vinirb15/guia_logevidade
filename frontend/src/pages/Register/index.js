@@ -47,11 +47,11 @@ export default function Register() {
     function mostrarOcultarSenha() {
         var senha = document.getElementById("password");
         if (senha.type === "password") {
-          senha.type = "text";
+            senha.type = "text";
         } else {
-          senha.type = "password";
+            senha.type = "password";
         }
-      }
+    }
 
     return (
         <div className="register-container">
@@ -76,34 +76,40 @@ export default function Register() {
                     <input
                         placeholder="Nome da Organização"
                         value={name}
+                        required
                         onChange={e => setName(e.target.value)}
                     />
 
                     <input
-                        placeholder="Senha"
+                        placeholder="Senha (Min. 8 caracteres)"
                         type="password"
                         id="password"
+                        minLength="8" 
+                        required
                         value={senha}
                         onChange={e => setSenha(e.target.value)}
                     />
-                        
-                    <FiKey onClick={() => mostrarOcultarSenha()}/>
+
+                    <FiKey onClick={() => mostrarOcultarSenha()} />
 
                     <input
                         type="email"
                         placeholder="E-Mail"
+                        required
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
 
                     <input
                         placeholder="Número de Contato  Ex:(xx)xxxx-xxxx"
+                        required
                         value={cellNumber}
                         onChange={e => setCellNumber(e.target.value)}
                     />
 
                     <textarea
                         placeholder="Descrição"
+                        required
                         value={description}
                         onChange={e => setDescription(e.target.value)}
                     />
@@ -111,6 +117,7 @@ export default function Register() {
                     <div className="input-group">
                         <input
                             placeholder="Cidade"
+                            required
                             value={city}
                             onChange={e => setCity(e.target.value)}
                         />
@@ -118,6 +125,7 @@ export default function Register() {
                         <input
                             placeholder="UF"
                             style={{ width: 80 }}
+                            required
                             value={uf}
                             onChange={e => setUf(e.target.value)}
                         />

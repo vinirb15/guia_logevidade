@@ -4,7 +4,9 @@ const routes = require('./routes');
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    exposedHeaders: '*',
+  }));
 app.use(routes);
 
 //notFound
@@ -20,7 +22,7 @@ app.use((error, req, res, next) => {
     res.json({ error: error.message })
 })
 
-app.listen(process.env.PORT, () => {
+app.listen(3333, () => {
     var dtNow = new Date;
     console.log('--------------------------------------');
     console.log('    Server running: ' + dtNow.getHours() + ":" + dtNow.getMinutes() + ":" + dtNow.getSeconds());
